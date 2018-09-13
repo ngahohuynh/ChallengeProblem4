@@ -1,0 +1,63 @@
+MainActivity.java
+
+package com.example.pc.simplelistview;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+public class MainActivity extends AppCompatActivity {
+    ListView lvProvince;
+    String[] province = {"Ha Noi","Ha Nam","Ha Tinh","Nghe An",
+            "Quang Binh","Quang Tri","Hue","Da Nang","Quang Nam","Quang Ngai",
+            "Gia Lai","Khanh Hoa","Phu Yen","Binh Dinh","TP Ho Chi Minh",
+            "Can Tho","Ca Mau"};
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        lvProvince = (ListView) findViewById(R.id.lvProvince);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, province);
+        lvProvince.setAdapter(arrayAdapter);
+
+        lvProvince.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent =  new Intent(MainActivity.this,ProvinceActivity.class);
+                String message = province[position];
+                intent.putExtra("province",message);
+                startActivity(intent);            }
+        });
+    }
+}
+
+
+
+Province Activity.java
+
+package com.example.pc.simplelistview;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.TextView;
+
+public class ProvinceActivity extends AppCompatActivity {
+    TextView tvProvince;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_province);
+
+        tvProvince = findViewById(R.id.tvProvince);
+        String province = getIntent().getStringExtra("province");
+
+        tvProvince.setText(province);
+    }
+}

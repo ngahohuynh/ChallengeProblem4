@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-Province Activity.java
+ProvinceActivity.java
 
 package com.example.pc.simplelistview;
 
